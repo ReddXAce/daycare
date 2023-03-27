@@ -28,6 +28,24 @@ var  KidsAll = React.createClass({
 
     },
 
+    DeleteData(id){
+        var kidDelete = {
+            'id':id
+        }
+        $.ajax({
+            url:'/api/RemoveData',
+            dataType:'json',
+            type:'POST',
+            data:kidDelete,
+            success:function(data){
+                this.componentDidMount()
+            }.bind(this),
+            error:function(xhr,status,err){
+                alert(err)
+            }.bind(this)
+        })
+    },
+
     handleClick(){
         let url = ""
         if(this.state.Buttontxt == "Save"){
@@ -136,9 +154,23 @@ var  KidsAll = React.createClass({
                                         Delete
                                     </th>
                                 </tr>
+                                {this.state.data1.map((item,index) => (
+                                    <tr key={index}>
+                                        <td>{index+1}</td>
+                                        <td>{item.name}</td>
+                                        <td>{item.age}</td>
+                                        <td>{item.pickupTime}</td>
+                                        <td>{item.guardianName}</td>
+                                        <td>
+                                            <button onClick={(e) => {this.EditData(item)}} type="button" className="btn btn-success">Edit</button>
+                                        </td>
+                                        <td>
+                                        <button onClick={(e) => {this.DeleteData(item._id)}} type="button" className="btn btn-info">Delete</button>
+                                        </td>
+                                    </tr>
+                                ))}
                             </tbody>
                         </table>
-
                     </div>
                 </form>
             </div>
