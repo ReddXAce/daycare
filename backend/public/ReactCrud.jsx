@@ -31,7 +31,7 @@ var  KidsAll = React.createClass({
     handleClick(){
         let url = ""
         if(this.state.Buttontxt == "Save"){
-            url = "/api/saveata"
+            url = "/api/savedata"
         }
         let kidsData = {
             'name':this.state.name,
