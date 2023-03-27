@@ -33,9 +33,23 @@ app.use(express.static('public'))
 
 const port = 4000
 
+//get the data
+app.get('/api/getdata',(req,res) => {
+    model.find({},(err,data) => {
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send(data)
+        }
+    })
+})
+
 //funct to insert data
 
 app.post('/api/savedata',(req,res) => {
+    console.log(req.body)
+
     var mod = new model(req.body)
 
     mod.save(function(err, data){
@@ -44,6 +58,19 @@ app.post('/api/savedata',(req,res) => {
         }
         else{
             res.send({sata:"Record has been inserted"})
+        }
+    })
+})
+
+//remove data
+
+app.post('/api/getdata',(req,res) => {
+    model.remove({_id:req.body.id},(err) => {
+        if(err){
+            res.send(err)
+        }
+        else{
+            res.send({data:"Record has been deleted"})
         }
     })
 })
