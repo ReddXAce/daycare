@@ -1,6 +1,6 @@
 var  KidsAll = React.createClass({
 
-    getinitialState:function(){
+    getInitialState:function(){
         return{
             name:"",
             age:"",
